@@ -1,0 +1,21 @@
+city_name,state,lga,weather_type,description,longitude,latitude,temp(F),temp_min(F),temp_max(F),pressure(hPa),humidity(%),wind_speed(m/s),wind_deg,wind_gust(m/s),cloudiness(%),sea_atmo_pressure(hPa),grnd_atmo_pressure(hPa)
+Ikeja,Lagos,Agege,Clouds,scattered clouds,3.3258,6.6219,305.03,305.03,305.03,1014,62,2.06,240,,40,,
+Lagos,Lagos,Ajeromi-Ifelodun,Clouds,scattered clouds,3.3339,6.4448,305.3,305.3,305.3,1014,62,2.06,240,,40,,
+Ikeja,Lagos,Alimosho,Clouds,scattered clouds,3.2958,6.6106,304.65,304.65,304.65,1012,55,4.01,186,2.78,37,1012.0,1007.0
+Lagos,Lagos,Amuwo-Odofin,Clouds,scattered clouds,3.2667,6.45,303.59,303.59,303.59,1012,61,4.25,190,3.25,34,1012.0,1012.0
+Lagos,Lagos,Apapa,Clouds,scattered clouds,3.3667,6.45,304.55,304.55,304.55,1012,56,4.66,189,3.23,38,1012.0,1012.0
+Badagry,Lagos,Badagry,Rain,light rain,2.8833,6.4167,303.5,303.5,303.5,1012,63,4.52,192,3.83,79,1012.0,1012.0
+Epe,Lagos,Epe,Clouds,scattered clouds,3.9833,6.5833,306.55,306.55,306.55,1011,48,2.17,183,1.33,48,1011.0,1010.0
+Lagos,Lagos,Eti-Osa,Clouds,scattered clouds,3.5646,6.4374,300.76,300.76,300.76,1013,76,4.15,181,3.66,37,1013.0,1012.0
+Badagry,Lagos,Ibeju-Lekki,Rain,light rain,2.8833,6.4167,303.5,303.5,303.5,1012,63,4.52,192,3.83,79,1012.0,1012.0
+Ikeja,Lagos,Ifako-Ijaiye,Clouds,scattered clouds,3.2889,6.6847,305.41,305.41,305.41,1012,51,3.54,186,2.33,39,1012.0,1005.0
+Ikeja,Lagos,Ikeja,Clouds,scattered clouds,3.35,6.6,303.9,303.9,303.9,1012,59,4.13,186,2.99,35,1012.0,1008.0
+Ebute Ikorodu,Lagos,Ikorodu,Clouds,scattered clouds,3.5,6.6,302.19,302.19,302.19,1012,69,4.27,183,3.41,30,1012.0,1011.0
+Shogunle,Lagos,Kosofe,Clouds,scattered clouds,3.3842,6.5569,302.95,302.95,302.95,1012,65,4.42,185,3.4,32,1012.0,1012.0
+Lagos,Lagos,Lagos Island,Clouds,scattered clouds,3.4,6.45,301.5,301.5,301.5,1012,72,4.34,185,3.73,27,1012.0,1012.0
+Lagos,Lagos,Lagos Mainland,Clouds,scattered clouds,3.3865,6.5049,302.06,302.06,302.06,1012,69,4.75,185,3.79,29,1012.0,1012.0
+Shogunle,Lagos,Mushin,Clouds,scattered clouds,3.35,6.5333,303.0,303.0,303.0,1012,64,4.54,186,3.44,33,1012.0,1009.0
+Ketu Adieowe,Lagos,Ojo,Clouds,scattered clouds,3.1833,6.4667,303.71,303.71,303.71,1012,61,4.31,191,3.29,41,1012.0,1012.0
+Shogunle,Lagos,Oshodi-Isolo,Clouds,scattered clouds,3.308,6.5119,303.58,303.58,303.58,1012,61,4.63,187,3.41,34,1012.0,1011.0
+Shogunle,Lagos,Somolu,Clouds,scattered clouds,3.3872,6.5408,302.61,302.61,302.61,1012,66,4.53,185,3.53,31,1012.0,1011.0
+Lagos,Lagos,Surulere,Clouds,scattered clouds,3.35,6.5,302.64,302.64,302.64,1012,66,4.74,186,3.67,31,1012.0,1012.0

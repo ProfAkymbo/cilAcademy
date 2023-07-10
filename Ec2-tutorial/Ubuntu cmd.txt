@@ -1,0 +1,25 @@
+update your ubuntun instance using
+sudo at-get install update
+
+to install all the dependency  on the ec2 instance
+sudo apt install python3-pip
+sudo pip install apache-airflow
+sudo pip install pandas
+sudo pip install s3fs
+
+To run airflow server
+cd airflow
+RUN airflow standalone
+
+
+Crate a dag folder in the airflow folder
+RUN sudo anano airflow.cfg
+EDIT the dags file into the folder name eg weather_dags and save it
+
+crate new folde and name it the name u ut in the airflow.cfg file
+
+IN THE folder
+crate the pyhton file that contains the function and the dag python file using
+sudo nano weather_dag.py
+sudo nano openaweather_api.py
+

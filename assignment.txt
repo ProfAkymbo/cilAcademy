@@ -1,0 +1,8 @@
+What is the IP address of the CIL LMS platform
+What is th NS IP address for Google , Facebook and Testala
+What is the main differernce between IPV4 and IPV6 addresses
+Identify the differernt classes of IPV4 and provide the range of each class
+What is a MAC address, What is special about the MAC address with the hexadecimal valuel "FF:FF:FF:FF:FF:FF:"
+Provide the actual IPV$ address for the following special address types:
+(a) local loopback address
+(b) Limited Broadcast address
