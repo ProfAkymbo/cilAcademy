@@ -6,19 +6,47 @@ import os
 import boto3
 import io
 
+# open weather API key
 API_KEY = os.getenv('API_KEY')
+
+# link to the source of the LGA names
 URL = 'https://raw.githubusercontent.com/xosasx/nigerian-local-government-areas/master/csv/lgas.csv'
 
-def read_data(url):
+# get and read the igeria LGA data
+def read_data(url:str)->pd.DataFrame:
+    """
+    read data from a url and filter the data
+
+    Args
+    url(str): The url link to the cav data that contains all the LGA in Nigeria
+
+    Returns:
+    Dataframe of all the Lga and state names
+    
+    """
     try:
-        lga_df = pd.read_csv(url, on_bad_lines='skip')
+        lga_df = pd.read_csv(url, on_bad_lines='skip') # load the csv data
+        #filter lagos state LGA
         lagos_df = lga_df[lga_df.state_name == 'Lagos']
         return lagos_df
     except Exception as e:
         print(f"Error reading data: {str(e)}")
         return pd.DataFrame()
 
+# get open weather data
 def openweather_api(df: pd.DataFrame, api_key: str) -> pd.DataFrame:
+    """
+    this function takes the LGA data and uses it to extract the weather infomation for each location
+
+    Args:
+    df(pd.Dataframe): The DataFrame data containing all the LGA datset
+    api_key(str): open weather API_KEY
+
+    Returns
+        DataFrame contianing all the weather data for each location       
+    """
+
+    # create an empy list that will take all the dataset
     json_list = []
     state_list = []
     lga_list = []
@@ -59,13 +87,24 @@ def openweather_api(df: pd.DataFrame, api_key: str) -> pd.DataFrame:
 
     return weather_data
 
+# transform the data gotten from open weather api
 def transform_data(df: pd.DataFrame) -> pd.DataFrame:
+    """
+    it takes the raw openweather API data, cleaned it and retun a new data
+    Args
+    df(pd.DataFrame): takes the dataframe genrated from open weather API
+
+    Returns:
+    Clean data and filter weather data
+    """
+
+    # the first cleaning is to explode the weather nested json data to get other attributes
     if 'weather' in df.columns:
         weather_data = df.explode('weather').reset_index(drop=True)
         weather_data = pd.concat([weather_data.drop(['weather'], axis=1),
                                   weather_data['weather'].apply(pd.Series)], axis=1)
 
-
+    # filtered needed data out
         data = {
             "id": weather_data['id'],
             "station_name": weather_data['name'],
@@ -89,6 +128,7 @@ def transform_data(df: pd.DataFrame) -> pd.DataFrame:
             "datetime": weather_data['time']
         }
 
+        # save the clean data to a dataframe
         cleaned_data = pd.DataFrame(data)
         
         return cleaned_data
@@ -96,7 +136,18 @@ def transform_data(df: pd.DataFrame) -> pd.DataFrame:
     else:
         return pd.DataFrame()
 
-def upload_dataframe_to_s3(dataframe, bucket, object_name):
+# upload dataframe to S3 bucket
+def upload_dataframe_to_s3(dataframe:pd.DataFrame, bucket:str, object_name:str):
+    """
+    this functions store the dataset temporarily in the system memory before sending it to the bucket
+
+    dataframe(pd.DataFrame): this a dataframe data
+    bucket(str): name of bucket where the data willl be store
+    object_name(str): the name of the object
+        
+    Example:
+    >>> upload_dataframe_to_s3(data_df, 's3_data', 'C/name')
+    """
     csv_buffer = io.StringIO()
     dataframe.to_csv(csv_buffer, index=False)
     csv_buffer.seek(0)
@@ -108,17 +159,20 @@ def upload_dataframe_to_s3(dataframe, bucket, object_name):
     except Exception as e:
         print(f"Error uploading data to S3: {str(e)}")
         return False
-
+# lambda fnctjoins that runs all the other function
 def lambda_handler(event, context):
     try:
-        lga = read_data(URL)
+        lga = read_data(URL) #load the LGA data
 
+        # name to all the datasets
         raw_weather_data_filename = f'Lagos_LGA_raw_Weather_data_{date.today()}_{datetime.now().strftime("%H.%M.%S")}.csv'
         cleaned_weather_data_filename = f'Lagos_LGA_cleaned_Weather_data_{date.today()}_{datetime.now().strftime("%H.%M.%S")}.csv'
 
+        # get the raw data and save it to the stagging bucket for raw data
         raw_weather_df = openweather_api(lga,API_KEY)
         upload_dataframe_to_s3(raw_weather_df, 'sammy-ec2-raw-weatherdata', raw_weather_data_filename)
 
+        # get the raw data and save it to the stagging bucket for clean data
         cleaned_weather_df = transform_data(raw_weather_df)
         upload_dataframe_to_s3(cleaned_weather_df, 'sammy-ec2-clean-weatherdata', cleaned_weather_data_filename)
 
